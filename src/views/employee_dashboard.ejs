@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta tags for character set and viewport -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/2631/2631389.png" />
+
+  <!-- Noty for notification on frontend side -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+        crossorigin="anonymous" />
+
+  <!-- Custom Styles -->
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to right, #3494e6, #ec6ead);
+    }
+
+    .container-fluid {
+      margin-top: 20px;
+    }
+
+    /* Assigned Reviews Section */
+    .col-md-12 {
+      margin-bottom: 20px;
+    }
+
+    /* Form Styles */
+    form {
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .form-control {
+      margin-bottom: 10px;
+    }
+
+    /* Assigned Reviews Cards */
+    .col-8 {
+      max-width: 100%;
+    }
+
+    /* Feedbacks by Others Section */
+    .col-12.col-lg-5 {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    .p-2.border.rounded {
+      background-color: #fff;
+      border: 1px solid #dee2e6;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .col-lg-5 {
+        order: -1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<% if (user && user.role === 'employee') { %>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluidnav">
+      <a class="navbar-brand" href="/employee-dashboard/:id">Review Platform</a>
+      <a class="navbar-brand p-2" href="/auth/signout" style="background-color: red; border-radius: 5px">Sign out</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Assigned reviews -->
+      <div class="col-md-12 col-lg-7 my-2">
+        <h1 class="text-left m-3 p-7">Assigned Reviews</h1>
+        <div class="d-flex justify-content-center align-items-center">
+          <div class="d-flex flex-wrap justify-content-center justify-content-lg-start ms-lg-4" style="width: 100%">
+            <% for (const review of assignedReviews) { %>
+              <div class="col-8 col-lg-5 p-2 m-3 rounded shadow">
+                <form action="/reviews/create/<%= user._id %>" class="d-flex flex-column" method="POST">
+                  <div class="mb-3">
+                    <label for="recipient" class="fw-semibold">Recipient: </label>
+                    <input
+                      type="email"
+                      class="form-control mt-2"
+                      id="recipient"
+                      value="<%= review.email %>"
+                      readonly
+                      name="recipient_email"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="feedback-form" class="form-label fw-semibold">Feedback:</label>
+                    <textarea class="form-control" id="feedback-form" name="feedback" rows="3"></textarea>
+                  </div>
+                  <button class="btn btn-primary align-self-end" style="width: 40%" type="submit">Submit</button>
+                </form>
+              </div>
+            <% } %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feedbacks given by others -->
+      <div class="col-12 col-lg-5 my-2">
+        <h1 class="text-center">Feedbacks by others</h1>
+        <div class="d-flex flex-column justify-content-center align-items-center">
+          <% for (const review of reviewsFromOthers) { %>
+            <div class="p-2 border rounded my-2" style="width: 80%">
+              <dl>
+                <dt class="fw-semibold">
+                  Reviewer:
+                  <span class="fw-normal"><%= review.reviewer.email %> (<%= review.reviewer.username %>)</span>
+                </dt>
+                <dt class="fw-semibold">
+                  Feedback:
+                  <span class="fw-normal"><%= review.review %></span>
+                </dt>
+              </dl>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<% } %>
+</html>

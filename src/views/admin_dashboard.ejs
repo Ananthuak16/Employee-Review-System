@@ -1,0 +1,258 @@
+<% if(locals.user && locals.user.role === 'admin') { %>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <!-- Meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+
+    <!-- Styles -->
+    <style>
+      /* Reset some default styles */
+      /* ... (styles for reset) */
+
+      /* Body styles */
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to right, #3494e6, #ec6ead);
+      }
+
+      /* Container styles */
+      .container-fluid {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      /* Heading styles */
+      h1 {
+        color: #1e1e1f;
+        font-size: 2rem;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      /* Card container styles */
+      .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
+
+      /* Card styles */
+      .card {
+        width: 19rem;
+        margin: 15px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Card body styles */
+      .card-body {
+        padding: 20px;
+      }
+
+      /* Card title styles */
+      .card-title {
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      /* Card subtitle styles */
+      .card-subtitle {
+        font-size: 1.2rem;
+        color: #555;
+        margin-bottom: 15px;
+      }
+
+      /* Button styles */
+      .btn {
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        width: 100%;
+      }
+
+      .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+      }
+
+      .btn-primary:hover {
+        background-color: #0056b3;
+      }
+
+      /* ... (styles for other buttons) */
+
+      /* Form control styles */
+      .form-control {
+        width: 100%;
+        /* ... (styles for form control) */
+      }
+
+      .form-control:focus {
+        border-color: #007bff;
+        /* ... (styles for focused form control) */
+      }
+
+      /* Navbar styles */
+      .navbar {
+        background-color: #343a40;
+        padding: 15px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-brand {
+        color: #fff;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .navbar-brand:hover {
+        text-decoration: none;
+      }
+
+      /* Navbar navigation styles */
+      .navbar-nav {
+        display: flex;
+        align-items: center;
+      }
+
+      .navbar-item {
+        margin-right: 15px;
+        color: #fff;
+        text-decoration: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+
+      .navbar-item:hover {
+        background-color: #555;
+      }
+
+      /* Sign out button styles */
+      .sign-out-btn {
+        background-color: #dc3545;
+      }
+
+      .sign-out-btn:hover {
+        background-color: #c82333;
+      }
+
+      /* Container for navigation bar */
+      .container-fluidnav {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: #061c31;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      /* Container for card section */
+      .cardii {
+        background: linear-gradient(to right, #3494e6, #ec6ead);
+        display: flex;
+        align-content: space-around;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container-fluidnav">
+        <a class="navbar-brand" href="/admin-dashboard">Review Platform</a>
+        <form class="d-flex px-4">
+          <a class="navbar-brand p-2" href="/admin-dashboard">admin dashboard_</a>
+          <a class="navbar-brand p-2" href="/add-employee">add employee</a>
+          <a class="navbar-brand p-2" href="/auth/signout" style="background-color: red; border-radius: 5px">Sign out</a>
+        </form>
+      </div>
+    </nav>
+
+    <!-- Main content container -->
+    <div class="container-fluid p-4">
+      <!-- Heading -->
+      <h1 class="mx-auto text-center">All Employees</h1>
+      
+      <!-- Card section -->
+      <div class="cardii">
+        <!-- Display all users -->
+        <div class="d-flex flex-wrap justify-content-center justify-content-md-start">
+          <% for (user of users) { %>
+            <div class="card shadow m-2" style="width: 19rem">
+              <div class="card-body">
+                <img src="https://cdn-icons-png.flaticon.com/512/7277/7277044.png" alt="" style="width: 40px" />
+                <h5 class="card-title"><%= user.username %></h5>
+                <h6 class="card-subtitle mb-2 text-secondary"><%= user.email %></h6>
+                <p class="card-subtitle mb-2 text-muted">Role: <%= user.role %></p>
+
+                <!-- Edit Employee Section -->
+                <div class="mb-3">
+                  <a href="/auth/edit-employee/<%= user._id %>" class="btn btn-primary mb-1" style="width: 100%">
+                    <i class="fa-solid fa-pen-to-square"></i> Edit Employee
+                  </a>
+                </div>
+
+                <!-- Assign Review Section -->
+                <div class="mb-3">
+                  <!-- Modal for Assigning Review -->
+                  <div class="modal fade" id="user<%= user.id %>" tabindex="-1" aria-labelledby="<%= user.id %>" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">Assign review</h1>
+                          
+                        </div>
+                        <div class="modal-body">
+                          <form action="reviews/assign-review/<%= user._id %>" method="POST">
+                            <div>Reviewer: <%= user.username %></div>
+                            <div class="mb-3">
+                              <label for="recipient-name" class="col-form-label">Recipient:</label>
+                              <select class="form-select" aria-label="Default select example" name="recipient_email">
+                                <% for (recipient of users) { %>
+                                  <!-- filter the current user from the list of recipients -->
+                                  <% if(recipient.email !== user.email) { %>
+                                    <option value="<%= recipient.email %>">
+                                      <%= recipient.email %> (<%= recipient.username %>)
+                                    </option>
+                                  <% } %>
+                                <% } %>
+                              </select>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                              <button type="submit" class="btn btn-primary mx-2">Assign</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>
+<% } %>

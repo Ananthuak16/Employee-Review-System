@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta tags for character set and viewport -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Title for the page -->
+  <title>Sign In</title>
+  
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Internal CSS styles -->
+  <style>
+    body {
+      background: linear-gradient(to right, #3494e6, #ec6ead);
+      font-family: 'Arial', sans-serif;
+      color: #2088b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 400px;
+      width: 100%;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      overflow: hidden;
+      opacity: 0.9;
+    }
+
+    h3 {
+      text-align: center;
+      color: #3494e6;
+    }
+
+    form {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    input.form-control {
+      border: none;
+      border-radius: 5px;
+      height: 40px;
+      padding: 10px;
+      margin-top: 5px;
+      background-color: #f2f2f2;
+      color: #333;
+    }
+
+    button.btn-primary {
+      background: linear-gradient(to right, #3494e6, #ec6ead);
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      padding: 10px;
+      font-size: 16px;
+      transition: background 0.3s ease;
+    }
+
+    button.btn-primary:hover {
+      background: linear-gradient(to left, #3494e6, #ec6ead);
+    }
+
+    .alert {
+      margin-top: 20px;
+      background-color: #ff4d4d;
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sign In Form Container -->
+  <div class="container">
+    <!-- Sign In Form -->
+    <form method="POST" action="/auth/signin">
+      <!-- Sign In Title -->
+      <h3 class="mb-4">Sign in</h3>
+
+      <!-- Display error message if any -->
+      <% if (error) { %>
+        <div class="alert alert-danger" role="alert">
+          <%= error %>
+        </div>
+      <% } %>
+
+      <!-- Email input -->
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" class="form-control" required>
+      </div>
+
+      <!-- Password input -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-control" required>
+      </div>
+
+      <!-- Sign In button -->
+      <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+
+      <!-- Link to redirect to signup page -->
+      <div class="text-center mt-3">
+        <p>Not a user? <a href="/auth/signup">Register</a></p>
+      </div>
+    </form>
+  </div>
+
+  <!-- Include Bootstrap JS and Popper.js -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
