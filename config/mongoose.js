@@ -9,10 +9,10 @@ import dotenv from "dotenv";
 export const connectDB = async () => {
   try {
     console.log("Connecting to the database...");
-    console.log("MongoDB URI:", process.env.mongoURL||"mongodb://localhost:27017/EmployeeReviewSystem");
+    console.log("MongoDB URI:", process.env.mongoURL);
 
     // Connect to MongoDB
-    await mongoose.connect(process.env.mongoURL||"mongodb://localhost:27017/EmployeeReviewSystem", {
+    await mongoose.connect(process.env.mongoURL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
