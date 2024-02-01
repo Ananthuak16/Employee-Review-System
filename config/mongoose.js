@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-dotenv.config();
+ dotenv.config();
 
 /**
  * Establishes a connection to the MongoDB database.
@@ -9,10 +9,10 @@ dotenv.config();
 export const connectDB = async () => {
   try {
     console.log("Connecting to the database...");
-    console.log("MongoDB URI:", process.env.mongoURL);
+    console.log("MongoDB URI:", process.env.mongoURL||"mongodb://localhost:27017/EmployeeReviewSystem");
 
     // Connect to MongoDB
-    await mongoose.connect(process.env.mongoURL, {
+    await mongoose.connect(process.env.mongoURL||"mongodb://localhost:27017/EmployeeReviewSystem", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
