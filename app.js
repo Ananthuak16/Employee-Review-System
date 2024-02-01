@@ -55,14 +55,8 @@ app.set('views', path.join(__dirname, 'src', 'views'));
 // Serve static files (if any)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Redirect root URL to signin page if not authenticated
-app.use('/', (req, res, next) => {
-  if (!req.isAuthenticated() && req.originalUrl !== '/auth/signin') {
-    // If user is not authenticated and not already on the signin page, redirect to signin page
-    return res.redirect('/auth/signin');
-  }
-  // If user is authenticated or already on the signin page, proceed to the next middleware
-  next();
+app.get('/', (req, res) => {
+  res.redirect('/auth/signin');
 });
 
 // Use routes
