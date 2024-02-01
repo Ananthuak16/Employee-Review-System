@@ -62,7 +62,7 @@ The project is structured as follows:
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
+   git clone <https://github.com/Ananthuak16/Employee-Review-System.git>
    ```
 
 2. Install dependencies:
@@ -87,17 +87,30 @@ The project is structured as follows:
    npm start
    ```
 
+## For Admin privileges
+
+const newUser = {
+  email: 'admin@example.com',
+  password: 'hashedPassword', 
+  username: 'exampleUser',
+  role: 'admin', // or 'employee'
+};
+
 ## Video Demo
 
-Please watch the project demonstration video [here](<link-to-youtube-video>).
+Please watch the project demonstration video [here](<https://drive.google.com/file/d/1JwDXBT0trOQzlYMScufdL9AhJtR1l4KD/view?usp=sharing>).
 
 ## Github Repository
 
-Explore the code on [GitHub](<link-to-github-repo>).
+Explore the code on [GitHub](<https://github.com/Ananthuak16/Employee-Review-System>).
 
 ## Hosted Application
 
-The application is not hosted currently. If required, follow the steps mentioned in the video to host it.
+Explore the Web app  on [GitHub](<https://employee-review-system-y3ak.onrender.com/admin-dashboard>).
+
+
+
+
 
 ## Additional Information
 
